@@ -1,5 +1,5 @@
-const CACHE = 'taavoura-binder-v1';
-const CORE = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
+const CACHE = 'taavoura-binder-v2';
+const CORE = ['./', './index.html', './manifest.json', './links.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(CORE)));
@@ -20,6 +20,11 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
+
+  if (req.url.endsWith('/links.json')) {
+    e.respondWith(fetch(req).catch(() => caches.match(req)));
+    return;
+  }
 
   if (req.mode === 'navigate') {
     e.respondWith(
