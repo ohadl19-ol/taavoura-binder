@@ -1,4 +1,4 @@
-const CACHE = 'taavoura-binder-v7';
+const CACHE = 'taavoura-binder-v8';
 const CORE = ['./', './index.html', './manifest.json', './links.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', (e) => {
