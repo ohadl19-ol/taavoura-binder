@@ -1,0 +1,15 @@
+from bs4 import BeautifulSoup
+raw = open('/Users/ohadlevy/Projects/taavoura-binder/index.html', encoding='utf-8').read()
+soup = BeautifulSoup(raw, 'lxml')
+print('title:', soup.title.get_text() if soup.title else None)
+print('chapters:', len(soup.select('.chapter')))
+print('case-title:', len(soup.select('.case-title')))
+print('case-link-slot:', len(soup.select('.case-link-slot')))
+appendix = soup.select_one('#c-appendix')
+print('appendix chapter found:', appendix is not None)
+if appendix:
+    print('appendix case-titles:', len(appendix.select('.case-title')))
+    print('appendix chips:', len(appendix.select('a.chip')))
+main = soup.select_one('main.main')
+print('main present:', main is not None)
+print('script tags:', len(soup.find_all('script')))
