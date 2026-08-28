@@ -1,0 +1,10 @@
+from bs4 import BeautifulSoup
+raw = open('/Users/ohadlevy/Projects/taavoura-binder/index.html', encoding='utf-8').read()
+soup = BeautifulSoup(raw, 'lxml')
+print('theme-toggle:', soup.select_one('#theme-toggle') is not None)
+print('progress-bar:', soup.select_one('#progress-bar') is not None)
+print('fab-toc:', soup.select_one('#fab-toc') is not None)
+print('to-top:', soup.select_one('#to-top') is not None)
+print('chapters still:', len(soup.select('.chapter')))
+print('case-link-slot still:', len(soup.select('.case-link-slot')))
+print('scripts:', len(soup.find_all('script')))
